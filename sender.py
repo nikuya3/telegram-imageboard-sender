@@ -44,8 +44,8 @@ limit = args.amount if args.amount != 0 else input('Enter the amount of photos t
 page = args.number if args.number != 0 else input('Enter the page number to send images from (default is 1st page): ')
 #posts = client.post_list(limit=2, page=randint(1, 50), tags=tags)
 posts = client.post_list(limit=limit, page=page, tags=tags)
-print(posts)
-if isdir('tmp'):
+print('Found {0} photos'.format(len(posts)))
+if isdir('tmp'): 
     rmtree('tmp')
 mkdir('tmp')
 for post in posts:
@@ -60,7 +60,6 @@ for post in posts:
         print('\033[92m' + '\t✔' + '\x1b[0m')
     except:
         print('\033[91m' + '\t✗' + '\x1b[0m')
-    
 rmtree('tmp')
 tg.stop_cli()
 print('Sucessful')
