@@ -1,4 +1,4 @@
-from urllib.request import urlretrieve
+from requests import get
 from os import mkdir
 from os.path import abspath, isdir
 from shutil import rmtree
@@ -54,7 +54,10 @@ for post in posts:
     url = 'https://danbooru.donmai.us' + post['file_url']
     path = 'tmp/' + url.split('/')[::-1][0]
     print(url, end='', flush=True)
-    urlretrieve(url, path)
+    request = get(url)
+    if request.ok:
+        with open(path, 'wb') as file:
+            file.write(request.content)
     try:
         sender.send_photo(recipient, abspath(path))
         print('\033[92m' + '\t✔' + '\x1b[0m')
