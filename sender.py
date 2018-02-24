@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from requests import get
 from os import mkdir
 from os.path import abspath, isdir
